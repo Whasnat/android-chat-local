@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/log_out_btn"
-        android:layout_width="54dp"
-        android:layout_height="59dp"
+        android:layout_width="96dp"
+        android:layout_height="61dp"
         android:text="LogOut"
         android:textSize="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,12 +23,10 @@
         android:id="@+id/chat_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
+        android:layout_marginStart="112dp"
         android:layout_marginTop="40dp"
         android:text="Chats"
-        android:textSize="11dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textSize="11sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,8 +35,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-
         android:text="Calls"
+        android:textSize="11sp"
         app:layout_constraintStart_toEndOf="@+id/chat_btn"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,8 +45,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
         android:text="contacts"
-        android:textSize="11dp"
+        android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/calls_btn"
@@ -56,12 +55,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="126dp"
-        android:layout_height="98dp"
+        android:layout_width="99dp"
+        android:layout_height="74dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintEnd_toStartOf="@+id/chat_btn"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
