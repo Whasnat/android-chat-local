@@ -20,20 +20,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
     <SearchView
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="5dp"
-        android:background="#651C8D4A"/>
+        android:background="#651C8D4A" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contact_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:scrollbars="vertical" />
 
 
 </LinearLayout>

@@ -50,11 +50,11 @@ public class FindContactsActivity extends AppCompatActivity {
                     null,
                     null,
                     null);
-            while (pointer.moveToNext()){
+            while (pointer.moveToNext()) {
                 String name = pointer.getString(pointer.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
                 String phone = pointer.getString(pointer.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
 
-                ContactListObject contact = new ContactListObject(name,phone);
+                ContactListObject contact = new ContactListObject(name, phone);
                 contactList.add(contact);
                 uContactListAdapter.notifyDataSetChanged();
             }

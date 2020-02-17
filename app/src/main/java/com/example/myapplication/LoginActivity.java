@@ -22,12 +22,13 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = "LoginActivity";
     private EditText uphone, vcode;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks ucallbacks;
     private Button usend;
     String verificationID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +46,14 @@ public class MainActivity extends AppCompatActivity {
         usend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //If automatic Verification fails
                 if (verificationID != null)
                     verifyPhoneNumberWithCode(verificationID, vcode.getText().toString());
 
                 else
-                //4.Authenticate By sending OTP to Phone and verifying User Login
-                Phoneauth();
+                    //4.Authenticate By sending OTP to Phone and verifying User Login
+                    Phoneauth();
             }
         });
 
