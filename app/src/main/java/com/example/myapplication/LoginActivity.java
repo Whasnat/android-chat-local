@@ -19,7 +19,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class LoginActivity extends AppCompatActivity {
@@ -32,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         FirebaseApp.initializeApp(this);
         vcode = findViewById(R.id.code);
         //1.Checks if the user is logged In
@@ -56,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                     Phoneauth();
             }
         });
-
 
         //6.Use the Callback from "5" check PASS/FAIL
         ucallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -87,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
         };
     }
 
-
     //Verify the Code With the Phone Verification Code
     private void verifyPhoneNumberWithCode(String verificationId, String code) {
         // [START verify_with_code]
@@ -104,9 +109,36 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //IF PASS
-                        if (task.isSuccessful())
-                            //call to mark the current User as Active
-                            userActive();
+                        if (task.isSuccessful()) {
+
+                            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if (user != null) {
+                                final DatabaseReference userDB = FirebaseDatabase
+                                        .getInstance()
+                                        .getReference()
+                                        .child("user").child("userUID");
+
+                                userDB.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (!dataSnapshot.exists()) {
+                                            Map<String, Object> userMap = new HashMap<>();
+                                            userMap.put("phone", user.getPhoneNumber());
+                                            userMap.put("name", user.getPhoneNumber());
+                                            userDB.updateChildren(userMap);
+                                        }
+
+                                        userActive();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+                        }
+                        //call to mark the current User as Active
                     }
                 });
     }
@@ -125,7 +157,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
-
 
     //5.Send Otp and return the Callback from Phone Number Within Time Limit
     private void Phoneauth() {
